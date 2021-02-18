@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { GlobalStyle } from './app.styles';
 import { NavBarList } from './components/navBarList';
 import { NavBarSelectionButton } from './components/navBarSelectNoteButton';
 import { NoteInfoPage } from './components/selectedItemShown';
@@ -64,12 +65,13 @@ function App() {
   
   return (
     <div>
+      <GlobalStyle />
       {
         isFormShowing ? <NewNoteForm addNewNote={addNewNoteToState} /> :
 
           <div className="container">
             <div className="row">
-              <div className="col-lg-6 col-md-6  col-sm-12">
+              <div className="column">
                 <ul>
                   <NavBarList
                     noteList={notesList}
@@ -80,7 +82,7 @@ function App() {
                 </ul>
               </div>
 
-              <div className="col-lg-6 col-md-6  col-sm-12">
+              <div className="column">
 
                 {
                   (notesList !== []) ? 
