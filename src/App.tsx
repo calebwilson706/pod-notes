@@ -1,11 +1,12 @@
 import React, { useState } from 'react';
+import { isTemplateExpression } from 'typescript';
 import { GlobalStyle } from './app.styles';
 import { NavBarList } from './components/navBarList';
 import { NavBarSelectionButton } from './components/navBarSelectNoteButton';
 import { NoteInfoPage } from './components/selectedItemShown';
 import { NewNoteForm } from './newPodNoteFormComponents/newNoteForm';
 import { OpenFormButton } from './newPodNoteFormComponents/openFormButton';
-import { addNewNoteMethod, ChangeSelection, UpdateNoteText, UpdateTextArea } from './types/FunctionTypes';
+import { addNewNoteMethod, ChangeSelection, DeletePodnoteProcedure, UpdateNoteText, UpdateTextArea } from './types/FunctionTypes';
 import { Note } from './types/PodNote'
 
 function App() {
@@ -13,9 +14,9 @@ function App() {
   const [isFormShowing, setIsFormShowing] = useState(false);
   const [notesList, setNotesList] = useState<Note[]>([
     {
-      title : "placeholder",
-      url : "blank",
-      note : ""
+      title: "Pod-Notes",
+      url: "By Caleb",
+      note: 'This app was created by Caleb Wilson for taking notes about things learned from a podcast, please enjoy! \n (This post cannot be deleted)'
     }
   ])
   const [selectedNoteNumber, setSelectedNoteNumber] = useState(0);
@@ -39,20 +40,29 @@ function App() {
     setTextAreaValue(notesList[index].note)
   }
 
-  const updateTextArea : UpdateTextArea = newString => {
+  const updateTextArea: UpdateTextArea = newString => {
     setTextAreaValue(newString);
   }
 
-  const updateTheNote : UpdateNoteText = newNoteText => {
+  const deletePodNote : DeletePodnoteProcedure = i => {
+    const current = notesList
+    const newList = current
+    newList.splice(i, 1)
+
+    setSelectedNoteNumber(0);
+    setNotesList(newList);
+  }
+
+  const updateTheNote: UpdateNoteText = newNoteText => {
     const theCurrentitem = notesList[selectedNoteNumber]
     const temp = {
-      title : theCurrentitem.title,
-      url : theCurrentitem.url,
-      note : newNoteText
+      title: theCurrentitem.title,
+      url: theCurrentitem.url,
+      note: newNoteText
     }
 
     const newNotesList = notesList.map((note, index) => {
-      if (index === selectedNoteNumber){
+      if (index === selectedNoteNumber) {
         return temp
       } else {
         return note
@@ -62,16 +72,19 @@ function App() {
     setNotesList(newNotesList);
   }
 
-  
+
   return (
     <div>
       <GlobalStyle />
       {
-        isFormShowing ? <NewNoteForm addNewNote={addNewNoteToState} /> :
+        isFormShowing ? <NewNoteForm
+          addNewNote={addNewNoteToState}
+          exitMethod={toggleShowForm}
+        /> :
 
           <div className="container">
             <div className="row">
-              <div className="column">
+              <div className="leftColumn">
                 <ul>
                   <NavBarList
                     noteList={notesList}
@@ -82,16 +95,18 @@ function App() {
                 </ul>
               </div>
 
-              <div className="column">
+              <div className="rightColumn">
 
                 {
-                  (notesList !== []) ? 
-                  <NoteInfoPage 
-                    theNote = {(notesList[selectedNoteNumber])}
-                    updateTheNoteText = {updateTheNote}
-                    updateTextAreaValue = {updateTextArea}
-                    textAreaValue = {textAreaValue}
-                  /> : <p>Create A Note...</p>
+                  (notesList !== []) ?
+                    <NoteInfoPage
+                      theNote={(notesList[selectedNoteNumber])}
+                      index={selectedNoteNumber}
+                      updateTheNoteText={updateTheNote}
+                      updateTextAreaValue={updateTextArea}
+                      textAreaValue={textAreaValue}
+                      deleteThePodnote={deletePodNote}
+                    /> : <p>Create A Note...</p>
                 }
               </div>
             </div>

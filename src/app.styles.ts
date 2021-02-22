@@ -1,14 +1,30 @@
 import styled, { createGlobalStyle } from 'styled-components' ;
 
 export const GlobalStyle = createGlobalStyle`
-    .column {
-        width: 50%;
-        float: left;
+    .leftColumn, .rightColumn {
         text-align: left;
     }
-    .row {
-        display: table;
-        
+
+    .leftColumn {
+        ul {
+            list-style: none;
+        }
+        float: left;
+        width: 20%;
+    }
+    .rightColumn {
+        text-align: left;
+        float: right;
+        width: 80%;   
     }
 
+    .exitButton {
+        color: red;
+    }
+
+`
+
+export const CurrentItemWrapperStyles = styled.div`
+    padding-left: 15px;
+    padding-right: 15px;
 `
