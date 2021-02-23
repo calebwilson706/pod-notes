@@ -4,8 +4,8 @@ import { GlobalStyle } from './app.styles';
 import { NavBarList } from './components/navBarList';
 import { NavBarSelectionButton } from './components/navBarSelectNoteButton';
 import { NoteInfoPage } from './components/selectedItemShown';
-import { NewNoteForm } from './newPodNoteFormComponents/newNoteForm';
-import { OpenFormButton } from './newPodNoteFormComponents/openFormButton';
+import { NewNoteForm } from './components/newPodNoteFormComponents/newNoteForm';
+import { OpenFormButton } from './components/newPodNoteFormComponents/openFormButton';
 import { addNewNoteMethod, ChangeSelection, DeletePodnoteProcedure, UpdateNoteText, UpdateTextArea } from './types/FunctionTypes';
 import { Note } from './types/PodNote'
 

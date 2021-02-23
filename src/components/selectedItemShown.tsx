@@ -3,15 +3,15 @@ import { FormEvent } from 'react';
 import { CurrentItemWrapperStyles } from '../app.styles';
 import { DeletePodnoteProcedure, handleChange, UpdateNoteText, UpdateTextArea } from '../types/FunctionTypes';
 import { Note } from '../types/PodNote';
-
+import TextareaAutosize from 'react-autosize-textarea';
 
 type Props = {
-    theNote : Note
-    index : number
+    theNote: Note
+    index: number
     updateTheNoteText: UpdateNoteText
     textAreaValue: string
     updateTextAreaValue: UpdateTextArea
-    deleteThePodnote : DeletePodnoteProcedure
+    deleteThePodnote: DeletePodnoteProcedure
 }
 
 
@@ -26,35 +26,41 @@ export const NoteInfoPage: React.FC<Props> = ({ theNote, index, updateTheNoteTex
     }
     return (
         <CurrentItemWrapperStyles>
-            <h1>{theNote?.title}</h1>
-            <p>{theNote?.url}</p>
-
+            <h1>{theNote.title}</h1>
             {
                 (
-                    
+
                     (index == 0) ?
                         <div>
+                            <p>{theNote.url}</p>
                             <p>{theNote.note}</p>
                         </div> :
                         <>
+                            <div>
+                                <a className="linkToPodcast" href={theNote.url}>{theNote.url}</a>
+                            </div>
                             <form>
-                                <div>
-                                    <textarea value={textAreaValue} onChange={handleChange}></textarea>
+                                <div className="textareaContainer">
+                                    <TextareaAutosize
+                                        value={textAreaValue}
+                                        onChange={handleChange}
+                                        rows={10}
+                                    ></TextareaAutosize>
                                 </div>
                                 <div>
-                                    <button type="submit" onClick={handleSubmit} disabled = {theNote.note === textAreaValue}>Save</button>
+                                    <button type="submit" onClick={handleSubmit} disabled={theNote.note === textAreaValue}>Save</button>
                                 </div>
                                 <div>
                                     <button onClick={
                                         () => deleteThePodnote(index)
-                                    } className = "exitButton">Delete Note</button>
+                                    } className="exitButton">Delete Note</button>
                                 </div>
                             </form>
-                        </> 
-                    
+                        </>
+
                 )
             }
 
-        </CurrentItemWrapperStyles>   
+        </CurrentItemWrapperStyles>
     )
 }

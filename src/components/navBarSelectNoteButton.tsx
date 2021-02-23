@@ -1,7 +1,7 @@
 import React from 'react';
 import { ChangeSelection } from '../types/FunctionTypes';
 import { Note } from '../types/PodNote';
-
+import { SelectItemButton } from '../app.styles';
 type Props = {
     noteItem : Note
     changeSelection : ChangeSelection
@@ -11,7 +11,7 @@ type Props = {
 
 export const NavBarSelectionButton : React.FC<Props> = ({ noteItem, changeSelection, index, currentSelected}) => {
     return (
-        <li>
+        <SelectItemButton>
             <button onClick = {
                 () => changeSelection(index)
             } disabled = { currentSelected === index }>
@@ -20,6 +20,6 @@ export const NavBarSelectionButton : React.FC<Props> = ({ noteItem, changeSelect
                     <p>{noteItem.url}</p>
                 </>
             </button>
-        </li>
+        </SelectItemButton>
     )
 }
