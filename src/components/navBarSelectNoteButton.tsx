@@ -15,10 +15,10 @@ export const NavBarSelectionButton : React.FC<Props> = ({ noteItem, changeSelect
             <button onClick = {
                 () => changeSelection(index)
             } disabled = { currentSelected === index }>
-                <>
-                    <p>{noteItem.title}</p>
+                <div className="navBarText">
+                    <p className="navbarTitle">{noteItem.title}</p>
                     <p>{noteItem.url}</p>
-                </>
+                </div>
             </button>
         </SelectItemButton>
     )

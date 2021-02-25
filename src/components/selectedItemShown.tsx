@@ -26,14 +26,14 @@ export const NoteInfoPage: React.FC<Props> = ({ theNote, index, updateTheNoteTex
     }
     return (
         <CurrentItemWrapperStyles>
-            <h1>{theNote.title}</h1>
+            <h1 className="titleOfPodnote" >{theNote.title}</h1>
             {
                 (
 
                     (index == 0) ?
                         <div>
-                            <p>{theNote.url}</p>
-                            <p>{theNote.note}</p>
+                            <p className="byCaleb">{theNote.url}</p>
+                            <p className="introText">{theNote.note}</p>
                         </div> :
                         <>
                             <div>
