@@ -1,5 +1,8 @@
 import styled, { createGlobalStyle } from 'styled-components';
 
+
+
+//main screen columns
 export const GlobalStyle = createGlobalStyle`
     
     .leftColumn, .rightColumn {
@@ -7,9 +10,6 @@ export const GlobalStyle = createGlobalStyle`
     }
 
     .leftColumn {
-        ul {
-            list-style: none;
-        }
         float: left;
         width: 20%;
     }
@@ -18,13 +18,9 @@ export const GlobalStyle = createGlobalStyle`
         float: right;
         width: 80%;   
     }
-
-    .exitButton {
-        color: red;
-    }
-
 `
 
+//current pod not info styling
 export const CurrentItemWrapperStyles = styled.div`
     padding-left: 15px;
     padding-right: 15px;
@@ -49,7 +45,11 @@ export const CurrentItemWrapperStyles = styled.div`
     .introText {
         font-family: 'Roboto', sans-serif;
     }
-`   
+`
+//nav bar list styling
+export const NavigationUnorderdList = styled.ul`
+    list-style: none;
+`
 
 
 export const SelectItemButton = styled.li`
@@ -61,6 +61,11 @@ export const SelectItemButton = styled.li`
         border-radius: 15px;
         border-style: none;
         color: black;
+        
+    }
+
+    button:hover {
+        background-color: #cad1eb;
     }
 
     .navbarTitle {
@@ -79,10 +84,93 @@ export const SelectItemButton = styled.li`
     button:disabled {
         background-color: #698cff;
         color: white;
+        cursor: default;
     }
     
     .navBarText {
         padding: 5px 0px 5px 5px;
     }
 
+`
+
+
+export const NewNoteButton = styled.button`
+    font-family: 'Staatliches', cursive;
+    font-size: 1.2rem;
+    margin: 0;
+    background-color: #98f58c;
+    border-style: none;
+    color: black;
+    width: 10vw;
+    border-radius: 10px;
+    
+
+    :hover{ 
+        cursor: pointer;
+        color: gray;
+        background-color: #b6dbb2;
+    }
+`
+
+//form styling
+
+export const NewNoteFormWrapper = styled.form`
+    text-align: center;
+`
+
+
+
+
+
+export const FormButtonContainer = styled.div`
+    
+    button { //all buttons
+        font-family: 'Roboto' sans-serif;
+        font-size: 1.3rem;
+        border-style: none;
+        border-radius: 5px;
+        cursor: pointer;
+    }
+
+    .submitButton {
+        background-color: #1d9148;
+        color: white;
+
+        :hover {
+            background-color: #63bf86;
+        }
+    }
+
+    .exitButton {
+        background-color: #c41831;
+        color: white;
+
+        :hover {
+            background-color: #de6274;
+        }
+    }
+
+    .clearButton {
+        background-color:  #698cff;
+        color: white;
+
+        :hover {
+            background-color: #c0cefc;
+        }
+    }
+`
+
+export const FormTextFieldsContainer = styled.div`
+    margin-top: 4vh;
+    margin-bottom: 2vh;
+    
+    .textField {
+        padding:  2.5px 10px 2.5px 10px;
+        width: 25vw;
+        font-family: 'Roboto' sans-serif;
+        font-size: 1.3rem;
+        border-style: none;
+        border-radius: 5px;
+        background-color: #dce1e6;
+    }
 `

@@ -1,12 +1,13 @@
 import React, { useState } from 'react'
 import { FormEvent } from 'react'
-import { addNewNoteMethod, handleChange } from '../../types/FunctionTypes'
+import { addNewNoteMethod, handleChange, HandleSubmit } from '../../types/FunctionTypes'
 import { checkURLFormatIsValid } from '../../utilities'
 import Modal from '@bdenzer/react-modal';
+import { FormButtonContainer, FormTextFieldsContainer, NewNoteFormWrapper } from '../../app.styles';
 
 type Props = {
     addNewNote: addNewNoteMethod,
-    exitMethod : () => void
+    exitMethod: () => void
 }
 
 
@@ -17,17 +18,18 @@ export const NewNoteForm: React.FC<Props> = ({ addNewNote, exitMethod }) => {
     const [issueText, setIssueText] = useState<string>("");
     const [showModal, setShowModal] = useState(false);
 
-    const handleTitleChange : handleChange = e => {
+
+    const handleTitleChange: handleChange = e => {
         setTitle(e.target.value);
     }
-    const handleUrlChange : handleChange = e => {
+    const handleUrlChange: handleChange = e => {
         setUrl(e.target.value);
     }
     const closeModal = () => {
         setShowModal(false);
         setIssueText("");
     }
-    const handleSubmit = (e: FormEvent<HTMLButtonElement>) => {
+    const handleSubmit: HandleSubmit = e => {
         e.preventDefault();
 
         if (newTitle === "") {
@@ -40,27 +42,43 @@ export const NewNoteForm: React.FC<Props> = ({ addNewNote, exitMethod }) => {
             setIssueText("The URL Is Not In A Valid Format")
             setShowModal(true)
             return
-        } 
-    
+        }
+
         addNewNote({
-            title : newTitle,
-            url : newUrl,
-            note : ""
+            title: newTitle,
+            url: newUrl,
+            note: ""
         })
     }
+    const handleClear: HandleSubmit = e => {
+        e.preventDefault();
+
+        setTitle("");
+        setUrl("");
+    }
     return (
-        <form>
+        <NewNoteFormWrapper>
             <Modal
-                shouldShowModal = {showModal}
-                closeModal = {closeModal}
-                title = {"Invalid Input"}
+                shouldShowModal={showModal}
+                closeModal={closeModal}
+                title={"Invalid Input"}
             >{issueText}</Modal>
-            <div>
-                <input type = "text" value = {newTitle} onChange = {handleTitleChange} placeholder = "Type Title Here"/>
-                <input type = "text" value = {newUrl} onChange = {handleUrlChange} placeholder = "Insert URL Here"/>
-            </div>
-            <button type = "submit" onClick = {handleSubmit}>Save</button>
-            <button onClick = {exitMethod} className = "exitButton">Exit</button>
-        </form>
+            <FormTextFieldsContainer>
+                <div>
+                    <input className="textField" type="text" value={newTitle} onChange={handleTitleChange} placeholder="Type Title Here" />
+                </div>
+                <div>
+                    <input className="textField" type="text" value={newUrl} onChange={handleUrlChange} placeholder="Insert URL Here" />
+                </div>
+            </FormTextFieldsContainer>
+
+            <FormButtonContainer>
+                <button type="submit" onClick={handleSubmit} className="submitButton">Save</button>
+                <button onClick={exitMethod} className="exitButton">Exit</button>
+                <div>
+                    <button type="submit" onClick={handleClear} className="clearButton">Clear</button>
+                </div>
+            </FormButtonContainer>
+        </NewNoteFormWrapper>
     )
 }

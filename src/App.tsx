@@ -85,14 +85,12 @@ function App() {
           <div className="container">
             <div className="row">
               <div className="leftColumn">
-                <ul>
                   <NavBarList
                     noteList={notesList}
                     changeSelection={changeSelection}
                     currentSelected={selectedNoteNumber}
+                    toggleShowForm={toggleShowForm}
                   />
-                  <OpenFormButton callback={toggleShowForm} />
-                </ul>
               </div>
 
               <div className="rightColumn">

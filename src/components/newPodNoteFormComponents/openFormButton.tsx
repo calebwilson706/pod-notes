@@ -1,4 +1,5 @@
 import React from 'react'
+import { NewNoteButton } from '../../app.styles'
 
 type Props = {
     callback : () => void
@@ -6,10 +7,12 @@ type Props = {
 
 export const OpenFormButton : React.FC<Props> = ({ callback }) => {
     return (
-        <button onClick = {
-            () => callback()
-        }>
-            New Note
-        </button>
+        <li style={{  paddingTop: '3px'  }}>
+            <NewNoteButton onClick = {
+                () => callback()
+            }>
+                New Note
+            </NewNoteButton>
+        </li>
     )
 }
