@@ -20,11 +20,11 @@ export const GlobalStyle = createGlobalStyle`
     }
 `
 
-//current pod not info styling
+//current pod note info styling
+
 export const CurrentItemWrapperStyles = styled.div`
     padding-left: 15px;
     padding-right: 15px;
-
     .linkToPodcast {
         padding-bottom: 10px;
         text-decoration: none;
@@ -46,9 +46,62 @@ export const CurrentItemWrapperStyles = styled.div`
         font-family: 'Roboto', sans-serif;
     }
 `
+
+export const WrapperDivForButtonsAndTextA = styled.div`
+    display: inline-block;
+
+    .textAreaContainer {
+        .textAreaStyles {
+            font-family : 'Roboto' sans-serif;
+            font-size : 1rem;
+            outline: none;
+            border: 3px solid #BFC0C0;
+
+            :focus {
+                border: 3px solid #698CFF;
+            }
+        }
+        padding-top: 5px;
+    }
+`
+export const SaveAndDeleteContainer = styled.div`
+    button {
+        font-family: 'Roboto' sans-serif;
+        font-size: 1rem;
+        border-style: none;
+        border-radius: 5px;
+        cursor: pointer;
+        width: 7vw;
+    }
+
+    text-align: center;
+`
+
+export const SaveChangesButton = styled.button`
+    :disabled {
+        cursor: default;
+        color: #909091;
+        background-color: #BFC0C0;
+    }
+    color: black;
+    background-color: #98F58C;
+`
+export const DeleteNoteButton = styled.button`
+
+    background-color: #a12a38;
+    color: white;
+
+    :hover {
+        background-color: #de6f7c;
+    }
+`
+
+
+
 //nav bar list styling
 export const NavigationUnorderdList = styled.ul`
     list-style: none;
+    
 `
 
 
@@ -115,7 +168,9 @@ export const NewNoteButton = styled.button`
 //form styling
 
 export const NewNoteFormWrapper = styled.form`
-    text-align: center;
+    text-align: left;
+    display: inline-block;
+    padding-left: 3vw ;
 `
 
 
@@ -123,7 +178,7 @@ export const NewNoteFormWrapper = styled.form`
 
 
 export const FormButtonContainer = styled.div`
-    
+    text-align: center;
     button { //all buttons
         font-family: 'Roboto' sans-serif;
         font-size: 1.3rem;
@@ -153,7 +208,6 @@ export const FormButtonContainer = styled.div`
     .clearButton {
         background-color:  #698cff;
         color: white;
-
         :hover {
             background-color: #c0cefc;
         }

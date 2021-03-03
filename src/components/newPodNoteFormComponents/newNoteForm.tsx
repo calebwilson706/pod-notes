@@ -79,6 +79,7 @@ export const NewNoteForm: React.FC<Props> = ({ addNewNote, exitMethod }) => {
                     <button type="submit" onClick={handleClear} className="clearButton">Clear</button>
                 </div>
             </FormButtonContainer>
+            
         </NewNoteFormWrapper>
     )
 }

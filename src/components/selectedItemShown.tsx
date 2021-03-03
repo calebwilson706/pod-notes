@@ -1,6 +1,6 @@
 import React, { ChangeEvent, useState } from 'react';
 import { FormEvent } from 'react';
-import { CurrentItemWrapperStyles } from '../app.styles';
+import { CurrentItemWrapperStyles, DeleteNoteButton, SaveAndDeleteContainer, SaveChangesButton, WrapperDivForButtonsAndTextA } from '../app.styles';
 import { DeletePodnoteProcedure, handleChange, UpdateNoteText, UpdateTextArea } from '../types/FunctionTypes';
 import { Note } from '../types/PodNote';
 import TextareaAutosize from 'react-autosize-textarea';
@@ -40,21 +40,30 @@ export const NoteInfoPage: React.FC<Props> = ({ theNote, index, updateTheNoteTex
                                 <a className="linkToPodcast" href={theNote.url}>{theNote.url}</a>
                             </div>
                             <form>
-                                <div className="textareaContainer">
-                                    <TextareaAutosize
-                                        value={textAreaValue}
-                                        onChange={handleChange}
-                                        rows={10}
-                                    ></TextareaAutosize>
-                                </div>
-                                <div>
-                                    <button type="submit" onClick={handleSubmit} disabled={theNote.note === textAreaValue}>Save</button>
-                                </div>
-                                <div>
-                                    <button onClick={
-                                        () => deleteThePodnote(index)
-                                    } className="exitButton">Delete Note</button>
-                                </div>
+                                <WrapperDivForButtonsAndTextA>
+                                    <div className="textAreaContainer">
+                                        <TextareaAutosize
+                                            value={textAreaValue}
+                                            onChange={handleChange}
+                                            rows={10}
+                                            className="textAreaStyles"
+                                        ></TextareaAutosize>
+                                    </div>
+                                    <SaveAndDeleteContainer>
+                                        <div>
+                                            <SaveChangesButton
+                                                type="submit"
+                                                onClick={handleSubmit}
+                                                disabled={theNote.note === textAreaValue}
+                                            >Save</SaveChangesButton>
+                                        </div>
+                                        <div>
+                                            <DeleteNoteButton onClick={
+                                                () => deleteThePodnote(index)
+                                            } className="exitButton">Delete Note</DeleteNoteButton>
+                                        </div>
+                                    </SaveAndDeleteContainer>
+                                </WrapperDivForButtonsAndTextA>
                             </form>
                         </>
 
