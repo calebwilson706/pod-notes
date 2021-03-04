@@ -25,6 +25,13 @@ function App() {
   const toggleShowForm = () => {
     setIsFormShowing(!isFormShowing)
   }
+  const updateStorageList = (newList : Note[]) => {
+    const jsonStr = JSON.stringify(newList)
+    localStorage.setItem("persistentPodnotes",jsonStr)
+
+    console.log(jsonStr)
+  }
+
   const addNewNoteToState: addNewNoteMethod = newNote => {
     const newList = [
       ...notesList,
@@ -32,7 +39,11 @@ function App() {
     ]
     setNotesList(newList)
     console.log(newList)
+    
+    updateStorageList(newList)
+    
     toggleShowForm()
+    
   }
 
   const changeSelection: ChangeSelection = index => {
@@ -51,6 +62,7 @@ function App() {
 
     setSelectedNoteNumber(0);
     setNotesList(newList);
+    updateStorageList(newList);
   }
 
   const updateTheNote: UpdateNoteText = newNoteText => {
@@ -70,11 +82,26 @@ function App() {
     })
 
     setNotesList(newNotesList);
+    updateStorageList(newNotesList);
   }
 
+  const startApp = () => {
+    const startList = localStorage.getItem("persistentPodnotes")
+    
+    console.log(startList)
+    
+    if (startList != null) {
+      const temp = JSON.parse(startList) as Note[]
+      setNotesList(temp)
+    }
+  }
+  
+  window.onload = function() {
+    startApp()
+  }
 
   return (
-    <div>
+    <div onLoad = {startApp}>
       <GlobalStyle />
       {
         isFormShowing ? <NewNoteForm
